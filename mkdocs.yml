@@ -9,8 +9,10 @@ repo_url: 'https://github.com/LinLiuLab/SE-2023'
 nav:
   - 课程概述: index.md
   - 小作业:
-    - 单元测试: exercises/unittests.md
-    - Docker: exercises/docker.md
+    - 测试及应用部署:
+      - 单元测试: exercises/unittests.md
+      - Docker: exercises/docker.md
+      - 清软论坛说明: exercises/bbs.md
     - UML: exercises/uml.md
   - FAQ: faq.md
 
@@ -25,6 +27,7 @@ theme:
     - navigation.expand
     - header.autohide
     - navigation.top
+    - content.code.copy
   favicon: images/laptop.png
 
 
@@ -54,6 +57,7 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - md_in_html
 
 extra_javascript:
   - javascripts/mathjax.js
