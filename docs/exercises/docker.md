@@ -342,7 +342,7 @@ $ docker-compose up
         - TZ=Asia/Shanghai
         command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
         ```
-    - 你的前端文件应该通过 nginx 的静态文件服务实现（在目前的项目中是通过单独的 React 服务实现的，你需要通过 `npm build` 打包后将其改为 nginx 静态文件服务实现）。你可以使用 volume 实现也可以构建⼀个基于 nginx 的镜像实现；
+    - 你的前端文件应该通过 nginx 的静态文件服务实现（在目前的项目中是通过单独的 React 服务实现的，你需要通过 `npm build` 打包后将其改为 nginx 静态文件服务实现）。你可以使用 volume 实现也可以构建⼀个基于 nginx 的镜像实现。在构建前端之前，你需要更改 `frontend/package.json`中的`proxy`字段为正确的URL，这样前端才能正确地访问后端。
     - nginx 与论坛后端处于⼀个 network，论坛后端与数据库处于⼀个 network。也即通过 nginx 所在容器无法访问数据库容器；
     - 仅 nginx 容器将端口映射给宿主机，端口号为 8000；
     - MySQL 镜像需要指定 `/home/ubuntu/mysql/` 文件夹为持久化存储 Volume，将镜像内 `/var/lib/mysql` 目录挂载到宿主机的 `/home/ubuntu/mysql/` 目录；
