@@ -31,21 +31,45 @@ $ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ### 填充数据库
 在 `manage.py` 文件中，我们已经实现了一个名为 `init_db` 的命令。这个命令的主要功能是使用测试数据来填充数据库。这种设计的目的是为了方便我们进行软件测试，因为在实际的软件开发过程中，我们经常需要在一个预设的环境中进行各种测试。
 ```shell
+$ python manage.py makemigrations
+$ python manage.py migrate
 $ python manage.py init_db
 ```
-接下来就可以使用 `python manage.py runserver` 来运行 Flask 服务了。
+填充的用户名为 `test_thss`，密码为 `test_thss`。
+
+接下来创建一个超级用户，以便在后续的测试中使用。
+```shell
+$ python manage.py createsuperuser
+```
+按提示输入用户名、邮箱和密码即可。
+
+接下来就可以使用 `python manage.py runserver` 来运行 Django 服务了。
 ```shell
 $ python manage.py runserver
 
-Serving Flask app "app" (lazy loading)
-Environment: dev
-Debug mode: on
-Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-Restarting with stat
-Debugger is active!
-Debugger PIN: 135-486-532
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 26, 2023 - 20:16:09
+Django version 4.1.4, using settings 'app.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
 ```
-可以通过 `http://localhost:5000/` 来访问 SimpleBBS 的网站了，并且可以通过 `http://localhost:5000/apidocs/` 来查看 swagger 文档。测试数据的登录用户名和密码都是 `test`。
+可以通过 `http://localhost:8000/admin` 来访问 Django 的后台管理系统，使用刚才创建的超级用户登录即可。
+
+
+### 前端
+项目提供了使用 React 实现的前端，你可以在 `frontend` 目录中找到前端代码。在运行前端之前，你需要安装 `node.js` 和 `npm`。
+运行下列命令来安装依赖并启动前端服务。
+```shell
+# 安装依赖
+$ npm install
+# 启动前端服务
+$ npm start
+```
+访问 `http://localhost:3000` 即可看到前端页面。使用填充的测试数据即可登录。
+
 
 ### 配置浏览器Driver
 端到端测试需要使用浏览器来模拟用户的行为，所以需要安装浏览器驱动，推荐使用 Chrome 浏览器和 ChromeDriver。
@@ -55,6 +79,8 @@ Debugger PIN: 135-486-532
 3. 解压后将其放在代码根目录下的 `drivers` 目录中。
 4. 修改 `tests/test_e2e.py` 中的 `DRIVER_PATH` 变量，将其指向 ChromeDriver 的实际路径。
 
+你可以在项目根目录中使用 `python driver.py` 来测试 ChromeDriver 是否配置正确。
+
 ### 运行测试
 在准备好上述环境后，就可以运行测试了。
 ```shell
@@ -63,7 +89,7 @@ $ python manage.py test
 # 查看命令文档
 $ python manage.py test --help
 # 筛选运行测试
-$ python manage.py test -f (test_api|test_basic|test_e2e)
+$ python manage.py test --filter (test_api|test_basic|test_e2e) # FIXME: currently unavailable, use single filter
 ```
 初次运行测试，部分测试可能会失败，这是因为我们还没有实现相应的功能。
 ```
@@ -76,19 +102,20 @@ Example: 使用错误信息进行注册，检查返回值为失败 ... ok
 test_register_params_check (test_basic.BasicTestCase) ... ok
 test_web (test_e2e.SeleniumTestCase)
 EXAMPLE: 使用测试用户进行登录 ... ok
-Name Stmts Miss Branch BrPart Cover
+
+Coverage Report:
+
+Name                  Stmts   Miss Branch BrPart  Cover
+-------------------------------------------------------
+post/controllers.py      98     86     18      0    10%
+post/urls.py              3      0      0      0   100%
+post/views.py            98     82     44      0    11%
+user/controllers.py      32     26      6      0    16%
+user/urls.py              3      0      0      0   100%
+user/views.py            57     44     14      0    18%
+-------------------------------------------------------
+TOTAL                   291    238     82      0    14%
 ------------------------------------------------------------
-app/__init__.py 18 9 4 1 55%
-app/checkers/user.py 2 1 0 0 50%
-app/controllers/hello.py 20 18 0 0 10%
-app/controllers/user.py 52 44 14 2 15%
-app/services/user.py 35 33 4 0 5%
-app/utils/config.py 12 8 4 0 38%
-app/utils/jwt.py 27 24 2 0 10%
-app/utils/middleware.py 11 7 4 1 33%
-------------------------------------------------------------
-TOTAL 177 144 32 4 20%
-HTML version: file:///home/wangao/learn/SimpleBBS/test_report/index.html
 ```
 至此，测试环境已经搭建完成，下面开始介绍本次作业的内容。
 
@@ -126,19 +153,6 @@ HTML version: file:///home/wangao/learn/SimpleBBS/test_report/index.html
     $ isort .
     ```
 这些工具都支持通过**配置文件**的形式来配置检查规则，以 `flake8` 为例，在运行 `flake8` 的目录下创建 `.flake8` 文件，那么在运行时会自动读取该文件中的配置。
-
-### 要求
-
-本次作业中的代码风格测试会提供 `lint.sh` 文件来自动检查和格式化代码，该文件会调用上述工具来检查和修复代码风格。
-你需要做的是在 `lint.sh` 中添加相应的命令，使得运行 `lint.sh` 后可以自动检查和修复代码风格，具体要求如下
-
-- 添加 `autopep8` 执行命令
-- 添加 `autoflake` 执行命令
-- 添加 `isort` 执行命令
-- 添加 `flake8` 执行命令
-- 补全 `flake8` 配置文件 `.flake8`
-
-在评测时执行 `lint.sh` 检测是否正确格式化并且符合 `flake8` 规范，如果不符合要求，将会扣除一定分数。
 
 ## 单元测试
 单元测试是软件开发中的一种测试方法，它的主要目标是验证代码中的最小可测试单元（通常是函数、方法或类）是否按预期工作。每个单元测试都应该是独立的，可以单独运行，而不依赖于任何其他代码或外部资源。
@@ -222,11 +236,11 @@ $ coverage html
 
 集成测试能够检查模块间的交互，往往能发现全局级别的问题。
 
-本次作业用使用 `pytest` 框架来编写集成测试，具体可以参考 [pytest 文档](https://docs.pytest.org/en/6.2.x/) 和 Flask 官方文档中的 [Testing](https://flask.palletsprojects.com/en/2.2.x/testing/) 部分。
+本次作业用使用 `Django` 自带的 `unittest` 框架来编写集成测试，具体可以参考 [Django 文档](https://docs.djangoproject.com/en/4.1/topics/testing/overview/)。
 
 你需要做的是补全 `tests/test_api.py` 中被标注为 `TODO` 的测试用例，然后运行如下命令：
 ```shell
-$ python manage.py test -f test_api
+$ python manage.py test --filter test_api
 ```
 评测时按照顺序正确测试对应路由即可获取这部分分数
 
@@ -276,11 +290,77 @@ $ python test_selenium.py
 
 在本次作业中，你需要补全 `tests/test_e2e.py` 中被标注为 `TODO` 的测试用例，然后运行如下命令：
 ```shell
-$ python manage.py test -f test_e2e
+$ python manage.py test -filter test_e2e
 ```
 
-## 作业说明
 
+## 作业要求
+
+### 代码风格测试
+在该部分中，你需要为SimpleBBS增加代码风格检查，要求如下：
+
+* 完善flake8配置文件
+
+    * 要求忽略且仅忽略.git，\_\_pycache\_\_文件夹
+    * 要求对app/services/post.py忽略E501错误，对app/services/user.py忽略E501错误
+    对tests/test_e2e.py忽略E501错误，对tests/test_api.py忽略E501错误
+    
+* 完善格式化脚本lint.sh，脚本执行命令如下
+
+    * 使用autopep8对代码自动格式化
+    * 使用autoflake对代码自动格式化
+    * 使用isort对代码自动格式化
+    * 使用flake8检查代码风格
+
+
+### 单元测试
+补充基础函数和单元测试分别占50%
+
+在该部分中，同学们需要以**测试驱动开发的方式**补完下列函数，并使用unittest补充相应的单元测试
+
+1. `register_params_check` 函数，实现注册账号 API 参数的校验。接收参数如下：
+
+    * `username`: 必填，用户账号
+    * `password`: 必填，用户密码
+    * `nickname`: 必填，用户昵称
+    * `url`: 必填，用户个人地址链接
+    * `mobile`: 必填，手机号
+    * `magic_number`: 选填，用户喜欢的幸运数字
+
+    **参数要求：**
+
+    - 用户账号为长度5-12的字母串加数字，且必须包含这两种类型，所有字母串必须在数字前面，字母包括大写字母和小写字母
+    - 用户密码为长度8-15的字符串，由大写、小写字母、数字和标点符号组成且必须包含这四种类型，有效的标签符号为-_*^
+    - 用户的手机号的格式为+[区号].[手机号]，其中区号必须为两位数字，手机号必须为12位数字
+    - 用户的个人地址链接包含协议和域名两部分
+        - 协议部分必须为http://或者https://
+        - 域名部分包含1到多个点`.`，表示以点`.`分隔的标签序列，且总长度不超过48个字符。标签序列只能由下列字符组成：
+            - 大小写字母`A`到`Z`和`a`到`z`
+            - 数字`0`到`9`，但最后一段顶级域名不能是纯数字（如 `163.com `可以但 `163.126` 不可以）
+            - 连字符`-`，但不能作为首尾字符
+    - magic_number为非负数 int 数值，可选参数（在设计测试用例时无需考虑最大值上界）
+
+   **返回值要求：**
+
+   * 返回错误或缺失字段名（如有多个只需要按前述顺序返回第一个）以及一个 bool 值表示是否出错
+   * 如果正确，返回 `"ok"` 以及 `True`
+   * 如果magic_number确实，请为content添加默认值为0的magic_number字段
+
+2. 对register_params_check补充单元测试
+请在tests/test_basic.py的`TODO`处补充相应的单元测试，并使得行覆盖率不低于 <span style="color: red">80％</span>，在文档中说明的所有测试用例应在测试代码中有完整体现。
+
+### 集成测试
+在该部分中，同学们需要为SimpleBBS添加集成测试，请补充tests/test_api.py中的`TODO`部分为注册路由、登录路由和登出路由添加测试，提供了部分注册路由测试代码供同学们参考。
+
+### 端到端测试
+在该部分中，同学们需要在tests/test_e2e.py中使用unittes架和selenium为SimpleBBS补充端到端测试，selenium提供了自动化控制浏览器的能力，同学们需要使用selenium控制浏览器实现用户的登录、发帖、更新帖子、删除帖子操作，在tests/test_e2e.py中提供了实现自动登录的部分供同学们参考。
+
+由于selenium需要用到WebDriver控制浏览器，可在如下链接下载对应浏览器类型及版本的webdriver，并放置于drivers目录，将tests/test_e2e.py中的 `DRIVER_PATH` 变量指向WebDriver的实际路径。
+
+!!! question "注意事项"
+    端到端测试需要使用浏览器和前端，但是由于助教已经在测试文件中启动了前端，所以你并不需要手动启动。
+
+## 作业说明
 
 禁止修改无 `TODO` 标注的文件以及添加新文件。
 提交压缩文件 `学号_姓名.zip` 到网络学堂。

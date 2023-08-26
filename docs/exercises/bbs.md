@@ -1,30 +1,45 @@
 # 清软论文说明
 
-本项目依赖 `Flask 1.1.2` 及 `Python 3.8.x`
+本项目依赖 `Django 4.1.4` `React` 及 `Python 3.8.x`
 
-## 开发启动
+项目分为前端和后端，前端代码在 `frontend` 目录下，后端代码在 `backend` 目录下
+
+
+## 开发启动前端
+安装依赖
+```shell
+$ npm install
+```
+启动开发服务器
+```shell
+$ npm start
+```
+浏览器上访问 `localhost:3000` 即可看到项目主页
+
+## 构建前端
+```shell
+$ npm run build
+```
+构建后的文件在 `frontend/build` 目录下
+## 开发启动后端
 安装依赖
 ```shell
 $ pip install -r requirements.txt
 ```
-根据项目模板提供的配置文件 `config.yaml` 启动开发服务器
+启动开发服务器
 ```shell
 $ python manage.py runserver
 ```
-浏览器上访问 `localhost:5000` 即可看到项目主页
+浏览器上访问 `localhost:8000` 即可看到项目主页
 
 ## Migration
-初始化数据库，在根目录下创建一个 `migrations` 文件夹，并且在数据库中生成一个 alembic_version 表
+初始化数据库，在 `user` 和 `post` 目录下各生成一个 `migrations` 文件夹，用于记录数据库的迁移历史
 ```shell
-$ python manage.py db init
-```
-创建迁移历史
-```shell
-$ python manage.py db migrate
+$ python manage.py makemigrations
 ```
 更新数据库
 ```shell
-$ python manage.py db upgrade
+$ python manage.py migrate
 ```
 填充虚假数据
 ```shell
@@ -40,11 +55,10 @@ $ python manage.py test
 ## Gunicorn 启动
 使用下列命令启动 Gunicorn 服务器
 ```shell
-$ gunicorn -w4 -b 127.0.0.1:5000 --log-level=debug manage:app
+$ gunicorn -w4 -b 127.0.0.1:8000 --log-level=debug app.wsgi --settings=app.settings_prod
 ```
 
 ## API 文档
-在启动项目后，访问 http://localhost:5000/apidocs 即可查看 Swagger 文档
 
 1. 测试 API-无身份验证
     ```
