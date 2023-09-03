@@ -302,8 +302,7 @@ $ python manage.py test -filter test_e2e
 * 完善flake8配置文件
 
     * 要求忽略且仅忽略.git，\_\_pycache\_\_文件夹
-    * 要求对app/services/post.py忽略E501错误，对app/services/user.py忽略E501错误
-    对tests/test_e2e.py忽略E501错误，对tests/test_api.py忽略E501错误
+    * 对tests/test_e2e.py忽略E501错误，对tests/test_api.py忽略E501错误
     
 * 完善格式化脚本lint.sh，脚本执行命令如下
 
@@ -331,7 +330,7 @@ $ python manage.py test -filter test_e2e
 
     - 用户账号为长度5-12的字母串加数字，且必须包含这两种类型，所有字母串必须在数字前面，字母包括大写字母和小写字母
     - 用户密码为长度8-15的字符串，由大写、小写字母、数字和标点符号组成且必须包含这四种类型，有效的标签符号为-_*^
-    - 用户的手机号的格式为+[区号].[手机号]，其中区号必须为两位数字，手机号必须为12位数字
+    - 用户的手机号的格式为+[区号].[手机号]，其中区号必须为两位数字，手机号必须为11位数字
     - 用户的个人地址链接包含协议和域名两部分
         - 协议部分必须为http://或者https://
         - 域名部分包含1到多个点`.`，表示以点`.`分隔的标签序列，且总长度不超过48个字符。标签序列只能由下列字符组成：
@@ -344,7 +343,7 @@ $ python manage.py test -filter test_e2e
 
    * 返回错误或缺失字段名（如有多个只需要按前述顺序返回第一个）以及一个 bool 值表示是否出错
    * 如果正确，返回 `"ok"` 以及 `True`
-   * 如果magic_number确实，请为content添加默认值为0的magic_number字段
+   * 如果magic_number缺失，请为content添加默认值为0的magic_number字段
 
 2. 对register_params_check补充单元测试
 请在tests/test_basic.py的`TODO`处补充相应的单元测试，并使得行覆盖率不低于 <span style="color: red">80％</span>，在文档中说明的所有测试用例应在测试代码中有完整体现。
