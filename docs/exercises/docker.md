@@ -1,5 +1,6 @@
 # 应用部署
-
+!!! warning "前置要求"
+    在进行本次作业前，请先阅读[清软论坛说明](./bbs.md)，**确保**对项目的基本操作和开发流程有所了解。
 ## 部署简介
 应用部署是指将开发的应用程序从开发环境迁移到生产环境的过程，以便最终用户能够访问和使用。
 
@@ -72,7 +73,7 @@ Docker 是一个开源的容器引擎，允许开发者打包他们的应用以�
 ### 常用命令
 本小节将以一个简单的例子介绍Docker的工作流程，以及其中最常用的几个命令，更多命令可以参考[官方文档](https://docs.docker.com/engine/reference/commandline/docker/)。
 
-例如我们要以容器化的方式运行Nginx，首先从Docker Hub拉取最新版本的Nginx镜像：
+例如我们要以容器化的方式运行 Nginx，首先从 Docker Hub 拉取最新版本的 Nginx 镜像：
 
 ```bash
 $ docker pull nginx:latest
@@ -227,10 +228,14 @@ ADD . /code/
 这个 Dockerfile 的内容比较简单，它首先指定了基础镜像为 Python 3.7，然后安装了项目所需要的依赖，最后将项目的代码复制到镜像中。这样我们就可以通过 Dockerfile 来构建一个包含项目代码和依赖的镜像了。
 
 ??? tip "如何调试 Dockerfile 的构建"
-    在实际编写 Dockerfile 的过程中，我们可能会遇到一些问题，例如某些依赖无法安装、代码无法复制等等。这时我们可以通过在 Dockerfile 中添加一些**调试信息**来帮助我们定位问题。例如，我们可以在 Dockerfile 中添加一条 `RUN ls -l` 命令来查看当前目录下的文件列表，或者添加一条 `RUN echo $PYTHONPATH` 命令来查看环境变量的值。这些调试信息可以帮助我们更好地理解 Dockerfile 的构建过程，从而更好地定位问题。
+    在实际编写 Dockerfile 的过程中，我们可能会遇到一些问题，例如某些依赖无法安装、代码无法复制等等。这时我们可以通过在 Dockerfile 中添加一些**调试信息**来帮助我们定位问题。
+    
+    例如，我们可以在 Dockerfile 中添加一条 `RUN ls -l` 命令来查看当前目录下的文件列表，或者添加一条 `RUN echo $PYTHONPATH` 命令来查看环境变量的值。这些调试信息可以帮助我们更好地理解 Dockerfile 的构建过程，从而更好地定位问题。
 
 ??? tip "如何确定构建的 Dockerfile 符合预期"
-    在构建好镜像之后，我们可能需要判断镜像是否符合预期。例如，我们可以通过 `docker run -it <image_name> /bin/bash` 命令来启动一个容器，或者通过`docker exec -it <container_name> /bin/bash` 命令来进入一个已经启动的容器，并在容器中利用 Linux 的命令行工具来查看容器中的文件列表、环境变量等信息。
+    在构建好镜像之后，我们可能需要判断镜像是否符合预期。
+    
+    例如，我们可以通过 `docker run -it <image_name> /bin/bash` 命令来启动一个容器，或者通过`docker exec -it <container_name> /bin/bash` 命令来进入一个已经启动的容器，并在容器中利用 Linux 的命令行工具来查看容器中的文件列表、环境变量等信息。
 
 ---
 
@@ -342,7 +347,7 @@ $ docker-compose up
         - TZ=Asia/Shanghai
         command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
         ```
-    - 你的前端文件应该通过 nginx 的静态文件服务实现（在目前的项目中是通过单独的 React 服务实现的，你需要通过 `npm build` 打包后将其改为 nginx 静态文件服务实现）。你可以使用 volume 实现也可以构建⼀个基于 nginx 的镜像实现。在构建前端之前，你需要更改 `frontend/package.json`中的`proxy`字段为正确的URL，这样前端才能正确地访问后端。
+    - 你的前端文件应该通过 nginx 的静态文件服务实现（在目前的项目中是通过单独的 React 服务实现的，你需要通过 `npm build` 打包后将其改为 nginx 静态文件服务实现）。你可以使用 volume 实现也可以构建⼀个基于 nginx 的镜像实现。同时你需要在 nginx 中实现反向代理，将 `/api/v1` 的请求转发到后端容器中；
     - nginx 与论坛后端处于⼀个 network，论坛后端与数据库处于⼀个 network。也即通过 nginx 所在容器无法访问数据库容器；
     - 仅 nginx 容器将端口映射给宿主机，端口号为 8000；
     - MySQL 镜像需要指定 `/home/ubuntu/mysql/` 文件夹为持久化存储 Volume，将镜像内 `/var/lib/mysql` 目录挂载到宿主机的 `/home/ubuntu/mysql/` 目录；
@@ -351,6 +356,14 @@ $ docker-compose up
 !!! Danger "注意事项"
     服务器上的所有文件的最后修改时间和服务开始运行的时间需要**保持在作业截止日期之前**，否则你的作业将会视情况扣除一定分数。
     你提交的代码将被作为**查重的依据**，请务必保证你的代码是自己独立完成的。
+
+## 评测说明
+- 本部分实验采用脚本测试+人工测试的方式进行，完成要求即可得分，请注意一定按照要求来进行实现，脚本无法进行评测会扣除大量分数；
+  - 注意：如未使用 Docker，最多只能获得 <span style="color: red">40%</span> 的分数。
+- DDL 日期之后，按照 $0.9^{迟交天数}$ 的衰减系数计算分数，迟交时间未满一天记作一天。
+
+## 提交说明
+参照 [单元测试](./unittests.md##提交说明) 章节的提交说明部分
 
 ## 延展阅读
 如果你想进一步深入了解Docker的实现原理，例如Cgroups、Namespace等技术，可以参考[这篇博客](https://mp.weixin.qq.com/s/Z5j0LPYQE5dCR0LOzbUlrQ)。
