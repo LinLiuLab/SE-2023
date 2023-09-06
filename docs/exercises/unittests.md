@@ -381,7 +381,7 @@ $ python manage.py test -filter test_e2e
 ### 端到端测试
 在该部分中，同学们需要在 `tests/test_e2e.py` 中使用 unittest 框架和 selenium 为 SimpleBBS 补充端到端测试，selenium 提供了自动化控制浏览器的能力，同学们需要使用 selenium 控制浏览器实现用户的登录、发帖、更新帖子、删除帖子操作，在 `tests/test_e2e.py` 中提供了实现自动登录的部分供同学们参考。
 
-由于 selenium 需要用到 WebDriver 控制浏览器，可在如下链接下载对应浏览器类型及版本的 WebDriver ，并放置于 `drivers`` 目录，将 `tests/test_e2e.py` 中的 `DRIVER_PATH` 变量指向WebDriver的实际路径，如果出现错误请首先仔细阅读 [环境搭建](#环境搭建) 章节的内容。 
+由于 selenium 需要用到 WebDriver 控制浏览器，可在如下链接下载对应浏览器类型及版本的 WebDriver ，并放置于 `drivers` 目录，将 `tests/test_e2e.py` 中的 `DRIVER_PATH` 变量指向WebDriver的实际路径，如果出现错误请首先仔细阅读 [环境搭建](#环境搭建) 章节的内容。 
 
 
 !!! question "注意事项"
