@@ -43,6 +43,11 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.inlinehilite
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
