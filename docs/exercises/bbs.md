@@ -54,7 +54,11 @@ $ python manage.py test --filter test_api
 $ python manage.py test --filter test_e2e
 ```
 ## 部署
-测试环境下使用的是 SQLite 数据库，生产环境下使用的是 MySQL 数据库，因此需要首先在 `app/settings_prod.py` 中配置 MySQL 数据库的连接信息，然后使用如下命令初始化数据库
+测试环境下使用的是 SQLite 数据库，生产环境下使用的是 MySQL 数据库。
+
+首先启动 MySQL 服务器，并创建数据库 `thss`。
+
+接下来在 `app/settings_prod.py` 中配置 MySQL 数据库的连接信息，然后使用如下命令初始化数据库
 ```shell
 $ python manage.py migrate --settings=app.settings_prod
 ```
