@@ -321,7 +321,7 @@ $ python test_selenium.py
 
 在本次作业中，你需要补全 `tests/test_e2e.py` 中被标注为 `TODO` 的测试用例，然后运行如下命令：
 ```shell
-$ python manage.py test -filter test_e2e
+$ python manage.py test --filter test_e2e
 ```
 
 
