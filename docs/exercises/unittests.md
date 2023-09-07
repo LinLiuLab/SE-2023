@@ -359,7 +359,7 @@ $ python manage.py test --filter test_e2e
 
 !!! note "Windows 用户注意事项"
     - Windows 用户需要补全的也是 **`lint.sh`** 而非 `lint.ps1`。
-    - Windows 用户在 PowerShell 中运行脚本时可能会遇到权限问题，可以使用管理员权限打开 PowerShell 并在其中输入 `Set-ExecutionPolicy RemoteSigned` 来解决。
+    - Windows 用户在 PowerShell 中运行脚本时可能会遇到权限问题，可以使用**管理员权限**打开 PowerShell 并在其中输入 `Set-ExecutionPolicy RemoteSigned` 来解决。
 
 经过正确配置 autoflake、autopep8、isort 对代码自动格式化后，执行flake8检查代码风格时，**不会输出任何错误或警告**
 ### 单元测试
