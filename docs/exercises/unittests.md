@@ -348,10 +348,11 @@ $ python manage.py test --filter test_e2e
     解决权限问题后，使用下面的命令运行脚本：
     ```powershell
     # 运行脚本
-    $ .\lint.sh
+    $ .\lint.ps1
     ```
 
 
+经过正确配置 autoflake、autopep8、isort 对代码自动格式化后，执行flake8检查代码风格时，**不会输出任何错误或警告**
 ### 单元测试
 补充基础函数和单元测试分别占50%
 
