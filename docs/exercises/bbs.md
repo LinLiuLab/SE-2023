@@ -136,7 +136,7 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
     }
 
     ```
-6. 获取当前登录账号个⼈信息
+6. 获取当前登录账号个人信息
     ```
     Method: GET
     URL: /api/v1/user
@@ -144,10 +144,10 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
     {
         "id": 1,
         "username": "201901****",
-        "nickname": "清⼩软",
-        "url": "", # 个⼈链接地址
-        "magic_number": "" # 个⼈幸运数字
-        "mobile": “+86.13312341234”, # ⼿机号
+        "nickname": "清小软",
+        "url": "", # 个人链接地址
+        "magic_number": "" # 个人幸运数字
+        "mobile": “+86.13312341234”, # 手机号
         "created": "2020-08-14T23:15:49+08:00" # 创建时间
     }
     ```
@@ -158,7 +158,7 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
     Response:
     {
         "id": 1,
-        "nickname": "清⼩软",
+        "nickname": "清小软",
         "created": "2020-08-14T23:15:49+08:00"
     }
     ```
@@ -168,10 +168,10 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
     URL: /api/v1/post
     QueryParam:
     {
-        'page': 1, # 可选，默认获取第⼀⻚
+        'page': 1, # 可选，默认获取第一页
         'size': 10, # 可选，默认为10
-        'userId': 1, # 可选，默认获取所有⽤户帖⼦
-        'orderByReply': true # 默认表⽰按照主贴更新时间降序，为true表⽰按照最新回复时间降序
+        'userId': 1, # 可选，默认获取所有用户帖子
+        'orderByReply': true # 默认表示按照主贴更新时间降序，为true表示按照最新回复时间降序
     }
     # Example: GET /api/v1/post?page=1&size=10&orderByReply=true
     Response:
@@ -183,12 +183,12 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
             {
                 "id": 1,
                 "userId": 1,
-                "nickname": "清⼩软",
-                "title": "hello, world", # 帖⼦标题
-                "content": "welcome to simplebbs", # 帖⼦内容，为富⽂本
-                "lastRepliedUserId": 2, # 最新回复⽤户id，默认为发帖⼈，⾮评分要求字段
-                "lastRepliedNickname": "清⼤软", # 最新回复⽤户昵称，默认为发帖⼈，⾮评分要求字段
-                "lastRepliedTime": "2020-08-22T20:18:19+08:00", # 最新回复时间，⾮评分要求字段
+                "nickname": "清小软",
+                "title": "hello, world", # 帖子标题
+                "content": "welcome to simplebbs", # 帖子内容，为富文本
+                "lastRepliedUserId": 2, # 最新回复用户id，默认为发帖人，非评分要求字段
+                "lastRepliedNickname": "清大软", # 最新回复用户昵称，默认为发帖人，非评分要求字段
+                "lastRepliedTime": "2020-08-22T20:18:19+08:00", # 最新回复时间，非评分要求字段
                 "created": "2020-08-14T00:00:00+08:00",
                 "updated": "2020-08-14T00:00:00+08:00"
             }
@@ -201,8 +201,8 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
     URL: /api/v1/post
     Request:
     {
-        "title": "欢迎使⽤清软论坛", # 帖⼦标题
-        "content": "请同学们畅所欲⾔" # 帖⼦内容
+        "title": "欢迎使用清软论坛", # 帖子标题
+        "content": "请同学们畅所欲言" # 帖子内容
     }
     Response:
     {
@@ -210,15 +210,15 @@ $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-le
         'postId': 1
     }
     ```
-10. 编辑当前用户发布的帖⼦
+10. 编辑当前用户发布的帖子
     ```
     Method: PUT
     URL: /api/v1/post/:postId
-    # :postId 为帖⼦的id，需要是本⼈所发帖才能修改
+    # :postId 为帖子的id，需要是本人所发帖才能修改
     Request:
     {
-        "title": "欢迎使⽤清软论坛", # 帖⼦标题
-        "content": "请同学们畅所欲⾔！" # 帖⼦内容
+        "title": "欢迎使用清软论坛", # 帖子标题
+        "content": "请同学们畅所欲言！" # 帖子内容
     }
     Response:
     {
