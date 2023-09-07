@@ -333,24 +333,33 @@ $ python manage.py test --filter test_e2e
 * 完善flake8配置文件
 
     * 要求忽略且仅忽略.git，\_\_pycache\_\_文件夹
-    * 对 `tests/test_e2e.py` 忽略E501错误，对 `tests/test_api.py` 忽略E501错误
+    * 对 `tests/test_e2e.py` 忽略E501错误，对 `tests/test_api.py` 忽略E501错误，对 `drivers.py` 忽略E501错误，对 `app/settings.py` 忽略E501错误
     
-* 完善格式化脚本lint.sh，脚本执行命令如下
+* 完善格式化脚本 `lint.sh`，脚本执行命令如下
 
     * 使用 autopep8 对代码自动格式化
     * 使用 autoflake 对代码自动格式化
     * 使用 isort 对代码自动格式化
     * 使用 flake8 检查代码风格
 
+* 评测时执行脚本检测是否正确格式化且符合flake8格式
+
+    === "MacOS 或 Linux 用户"
+        ```shell
+        $ chmod +x lint.sh
+        $ ./lint.sh
+        $ echo $?
+        ```
+
+    === "Windows 用户"
+        ```powershell
+        $ .\lint.ps1
+        $ echo $LASTEXITCODE
+        ```
+
 !!! note "Windows 用户注意事项"
-    Windows 用户在 PowerShell 中运行脚本时可能会遇到权限问题，可以使用管理员权限打开 PowerShell 并在其中输入 `Set-ExecutionPolicy RemoteSigned` 来解决。
-
-    解决权限问题后，使用下面的命令运行脚本：
-    ```powershell
-    # 运行脚本
-    $ .\lint.ps1
-    ```
-
+    - Windows 用户需要补全的也是 **`lint.sh`** 而非 `lint.ps1`。
+    - Windows 用户在 PowerShell 中运行脚本时可能会遇到权限问题，可以使用管理员权限打开 PowerShell 并在其中输入 `Set-ExecutionPolicy RemoteSigned` 来解决。
 
 经过正确配置 autoflake、autopep8、isort 对代码自动格式化后，执行flake8检查代码风格时，**不会输出任何错误或警告**
 ### 单元测试
