@@ -342,7 +342,7 @@ $ python manage.py test --filter test_e2e
     * 使用 isort 对代码自动格式化
     * 使用 flake8 检查代码风格
 
-* 评测时执行脚本检测是否正确格式化且符合flake8格式
+* 评测时执行脚本检测是否正确格式化且符合flake8格式，Windows用户请使用 PowerShell 而非 cmd 运行脚本
 
     === "MacOS 或 Linux 用户"
         ```shell
