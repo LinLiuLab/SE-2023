@@ -10,6 +10,7 @@ nav:
   - 课程概述: index.md
   - 小作业:
     - 测试及应用部署:
+      - exercises/index.md
       - 单元测试: exercises/unittests.md
       - Docker: exercises/docker.md
       - 清软论坛说明: exercises/bbs.md
@@ -24,11 +25,28 @@ theme:
   custom_dir: 'theme-override/'
   features:
     - navigation.instant
+    - navigation.footer
     - navigation.expand
-    - header.autohide
     - navigation.top
+    - navigation.path
+    - navigation.indexes
+    - header.autohide
     - content.code.copy
+    - search.share
+    - search.suggest
   favicon: images/laptop.png
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
 
 
 # Strategy: Use an absolute path
