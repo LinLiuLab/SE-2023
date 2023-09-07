@@ -95,6 +95,17 @@ $ npm start
 
 你可以在项目根目录中使用 `python driver.py` 来测试 ChromeDriver 是否配置正确。
 
+!!! question "运行 `drvier.py` 出现错误"
+    如果运行 `driver.py` 出现类似于下面的错误
+    ```shell
+    ValueError: Timeout value connect was <object object at 0x00000225D858F0C0>, but it must be an int, float or None.
+    ```
+    原因是 `urlib3` 版本和 `selenuim` 版本不兼容，可以通过下面的命令降低 `urllib3` 的版本来解决这个问题。
+    ```shell
+    $ pip uninstall urllib3
+    $ pip install urllib3==1.26.2
+    ```
+
 ### 运行测试
 在准备好上述环境后，就可以运行测试了。
 ```shell
