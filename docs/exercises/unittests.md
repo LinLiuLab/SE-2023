@@ -333,7 +333,7 @@ $ python manage.py test --filter test_e2e
 * 完善flake8配置文件
 
     * 要求忽略且仅忽略.git，\_\_pycache\_\_文件夹，migrations文件夹
-    * 对 `tests/test_e2e.py` 忽略E501错误，对 `tests/test_api.py` 忽略E501错误，对 `drivers.py` 忽略E501错误，对 `app/settings.py` 忽略E501错误，对 `user/views.py` 忽略E722错误，对 `app/settings.py` 忽略E501错误，对 `app/settings_prod.py` 忽略F401和F403错误
+    * 对 `tests/test_e2e.py` 忽略E501错误，对 `tests/test_api.py` 忽略E501错误，对 `driver.py` 忽略E501错误，对 `app/settings.py` 忽略E501错误，对 `user/views.py` 忽略E722错误，对 `app/settings.py` 忽略E501错误，对 `app/settings_prod.py` 忽略F401和F403错误
     
 * 完善格式化脚本 `lint.sh`，脚本执行命令如下
 
