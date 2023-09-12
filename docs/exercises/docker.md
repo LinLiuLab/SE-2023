@@ -363,7 +363,7 @@ $ docker-compose up
 - DDL 日期之后，按照 $0.9^{迟交天数}$ 的衰减系数计算分数，迟交时间未满一天记作一天。
 
 ## 提交说明
-参照 [单元测试](./unittests.md##提交说明) 章节的提交说明部分
+参照 [单元测试](./unittests.md#_16) 章节的提交说明部分
 
 ## 延展阅读
 如果你想进一步深入了解Docker的实现原理，例如Cgroups、Namespace等技术，可以参考[这篇博客](https://mp.weixin.qq.com/s/Z5j0LPYQE5dCR0LOzbUlrQ)。
