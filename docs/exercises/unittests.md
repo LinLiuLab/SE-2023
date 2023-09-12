@@ -114,7 +114,7 @@ $ python manage.py test
 # 查看命令文档
 $ python manage.py test --help
 # 筛选运行测试
-$ python manage.py test --filter (test_api|test_basic|test_e2e) # FIXME: 当前只能输入一个进行测试，例如--filter test_basic，多个测试暂时不支持
+$ python manage.py test --filter test_basic
 ```
 初次运行测试，部分测试可能会失败，这是因为我们还没有实现相应的功能。
 ```
@@ -410,6 +410,11 @@ $ python manage.py test --filter test_e2e
 
 !!! question "注意事项"
     端到端测试需要使用浏览器和前端，但是由于助教已经在测试文件中启动了前端，所以你并不需要手动启动。
+
+!!! note "Windows 用户注意事项"
+    使用 Windows 的同学在运行端到端测试时可能会出现如下提示
+    ![](../images/none-error-in-windows.png)
+    这是正常现象，不会影响测试结果，点击 `确定` 即可。
 
 ## 评测说明
 - “代码风格测试”部分的评测采用脚本对代码风格进行检查，正确通过即可全分；
