@@ -17,72 +17,110 @@
 
 ## 课程大纲
 
-1. 软件工程概述
-    * 软件
-    * 软件工程
-    * 软件工程师职业道德
-    * 软件自动化新进展
+<div class="grid cards" markdown>
 
+-   :fontawesome-regular-folder:{ .lg .middle } __软件工程概述__
 
-2. 单元测试与容器部署 
+    ---
+
+    - 软件
+    - 软件工程
+    - 软件工程师职业道德
+    - 软件自动化新进展
+
+-   :fontawesome-brands-docker:{ .lg .middle } __单元测试与容器部署__
+
+    ---
     * 软件测试概述  
     * 黑盒测试  
     * 白盒测试 
     * 代码性能分析
 
-3. 需求获取与原型化
+-   :fontawesome-brands-figma:{ .lg .middle } __需求获取与原型化__
+
+    ---
     * 需求
     * 需求获取技术    
     * 原型设计
     * 企业产品设计实践分享
+    
+-   :material-code-braces:{ .lg .middle } __交互式编程实践__
 
-4. 交互式编程实践
+    ---
+
     * 良好的编程实践  
     * ChatGPT 能力测试 （学长分享） 
     * Copilot X 实践经验 （学长分享）  
 
-5. 软件开发管理
+-   :fontawesome-brands-git-alt:{ .lg .middle } __软件开发管理__
+
+    ---
+
     * 敏捷开发
     * 团队管理  
     * 软件研发效能评估
 
-6. 软件架构设计及框架
+-   :fontawesome-solid-cloud:{ .lg .middle } __软件架构设计及框架__
+
+    ---
+
     * 软件架构演进
     * MVC，MVVM    
     * 微服务架构
     * 企业实践分享
 
-7. 软件系统建模
+-   :fontawesome-solid-sitemap:{ .lg .middle } __软件系统建模__
+
+    ---
+
     * UML
     * SysML  
     * MBSE
 
-8. 数据建模与数据库
+-   :material-database-outline:{ .lg .middle } __数据建模与数据库__
+
+    ---
+
     * ER图
     * 类图
     * DBMS
 
-9. 设计模式
+-   :fontawesome-solid-magnifying-glass:{ .lg .middle } __设计模式__
+
+    ---
+
     * GOF
     * HeadFirst Design Patterns
     * Pattern Language 
 
-10. 功能测试
-     * 软件测试类型
-     * 软件测试过程
-     * 系统功能测试
-     * 探索式测试
+-   :fontawesome-solid-flask:{ .lg .middle } __功能测试__
 
-11. 非功能测试
-     * 性能测试
-     * 可用性测试
-     * 性能测试工具
+    ---
 
+    * 软件测试类型
+    * 软件测试过程
+    * 系统功能测试
+    * 探索式测试
 
-12. 系统部署发布与持续运维
+-   :fontawesome-solid-flask-vial:{ .lg .middle } __非功能测试__
+
+    ---
+
+    * 性能测试
+    * 可用性测试
+    * 性能测试工具
+
+-   :fontawesome-brands-jenkins:{ .lg .middle } __系统部署与发布__
+
+    ---
+
     * 软件部署与交付
     * 持续集成与交付
     * 课程项目验收
+
+
+
+</div>
 
 ## 教学日历
 | 周次 | 日期  | 内容                                                  | 周次 | 日期  | 内容                                                  |
