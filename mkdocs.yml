@@ -9,8 +9,11 @@ repo_url: 'https://github.com/LinLiuLab/SE-2023'
 nav:
   - 课程概述: index.md
   - 小作业:
-    - 单元测试: exercises/unittests.md
-    - Docker: exercises/docker.md
+    - 测试及应用部署:
+      - exercises/index.md
+      - 单元测试: exercises/unittests.md
+      - Docker: exercises/docker.md
+      - 清软论坛说明: exercises/bbs.md
     - UML: exercises/uml.md
   - FAQ: faq.md
 

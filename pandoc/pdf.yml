@@ -13,8 +13,8 @@ variables:
     - right=3.18cm
   indent: yes
   numbersections: yes
-  title: 程序设计训练（Rust）指导书
-  author: 程序设计训练（Rust）教学团队
+  title: 软件工程
+  author: 软件工程教学团队
   date: '\today'
   header-includes: |
     \usepackage{enumitem}
