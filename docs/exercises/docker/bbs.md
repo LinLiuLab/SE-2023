@@ -1,11 +1,13 @@
 # 清软论文说明
 
-本项目后端部分依赖 `Django 4.1.4` 及 `Python 3.8.x`，前端部分依赖 `React`
+本项目后端部分依赖 `Django 4.1.4` 及 `Python 3.8.x`，前端部分依赖 `React` 和 `node 18.x.x`
 
 项目分为前端和后端，前端代码在 `frontend` 目录下，后端代码在 `backend` 目录下
 
 
 ## 开发启动前端
+在 `frontend` 目录下。
+
 安装依赖
 ```shell
 $ npm install --package-lock=package-lock.json
@@ -17,11 +19,15 @@ $ npm start
 浏览器上访问 `localhost:3000` 即可看到项目主页
 
 ## 构建前端
+在 `frontend` 目录下。
+
 ```shell
 $ npm run build
 ```
 构建后的文件在 `frontend/build` 目录下，可以使用 Nginx 等 Web 服务器进行部署
 ## 开发启动后端
+在 `backend` 目录下。
+
 安装依赖
 ```shell
 $ pip install -r requirements.txt
@@ -33,6 +39,8 @@ $ python manage.py runserver
 浏览器上访问 `localhost:8000/admin` 即可看到 Django 的后台管理页面
 
 ## Migration
+在 `backend` 目录下。
+
 初始化数据库，在 `user` 和 `post` 目录下各生成一个 `migrations` 文件夹，用于记录数据库的迁移历史
 ```shell
 $ python manage.py makemigrations app user post
@@ -47,6 +55,8 @@ $ python manage.py init_db
 ```
 
 ## 测试
+在 `backend` 目录下。
+
 使用下列命令同时运行单元测试、集成测试和端到端测试
 ```shell
 $ python manage.py test --filter test_basic
@@ -54,6 +64,8 @@ $ python manage.py test --filter test_api
 $ python manage.py test --filter test_e2e
 ```
 ## 部署
+在 `backend` 目录下。
+
 测试环境下使用的是 SQLite 数据库，生产环境下使用的是 MySQL 数据库。
 
 首先启动 MySQL 服务器，并创建数据库 `thss`。
@@ -64,6 +76,8 @@ $ python manage.py migrate --settings=app.settings_prod
 ```
 
 ## Gunicorn 启动
+在 `backend` 目录下。
+
 使用下列命令启动 Gunicorn 服务器
 ```shell
 $ DJANGO_MODULE_SETTINGS=app.settings_prod gunicorn -w4 -b 0.0.0.1:8000 --log-level=debug app.wsgi

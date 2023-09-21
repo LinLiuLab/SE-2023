@@ -20,3 +20,4 @@ pymdown-extensions==9.11
 mkdocs-git-revision-date-localized-plugin==1.2.0
 mkdocs-material==9.1.11
 mkdocs-git-authors-plugin==0.7.0
+jieba==0.42.1

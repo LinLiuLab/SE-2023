@@ -10,10 +10,14 @@ nav:
   - 课程概述: index.md
   - 小作业:
     - 测试及应用部署:
-      - exercises/index.md
-      - 单元测试: exercises/unittests.md
-      - Docker: exercises/docker.md
-      - 清软论坛说明: exercises/bbs.md
+      - 作业介绍: exercises/docker/intro.md
+      - 环境搭建: exercises/docker/setup.md
+      - 测试: exercises/docker/unittests.md
+      - Linux基础: exercises/docker/linux.md
+      - Docker: exercises/docker/docker.md
+      - 作业要求: exercises/docker/requirements.md
+      - 提交说明: exercises/docker/submit.md
+      - 清软论坛说明: exercises/docker/bbs.md
     - UML: exercises/uml.md
   - FAQ: faq.md
 
@@ -92,7 +96,8 @@ extra_css:
   - stylesheets/extra.css
 
 plugins:
-  - search
+  - search:
+      separator: '[\s\u200b\-]'
   - git-revision-date-localized:
       fallback_to_build_date: true
       locale: zh
