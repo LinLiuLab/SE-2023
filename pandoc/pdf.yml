@@ -13,7 +13,7 @@ variables:
     - right=3.18cm
   indent: yes
   numbersections: yes
-  title: 软件工程
+  title: 软件工程课程网站
   author: 软件工程教学团队
   date: '\today'
   header-includes: |
